@@ -16,10 +16,12 @@ models::CustomSqlModel::CustomSqlModel(QSqlDatabase db, const QString& tableName
 
 Qt::ItemFlags models::CustomSqlModel::flags(const QModelIndex& index) const
 {
+    return QSqlTableModel::flags(index);
     const Qt::ItemFlags flags = QSqlTableModel::flags(index);
 
     if (index.isValid() &&
-        std::find(m_privateKeyRows.cbegin(), m_privateKeyRows.cend(), index.column()) != m_privateKeyRows.cend())
+        std::find(m_privateKeyRows.cbegin(), m_privateKeyRows.cend(), index.column()) != m_privateKeyRows.cend()
+            && !index.row() == rowCount() - 1)
     {
         return flags & ~Qt::ItemIsEditable;
     }
