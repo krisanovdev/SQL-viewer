@@ -7,7 +7,7 @@ namespace presenters
     {
     public:
         virtual ~IConnectionProvider(){}
-        virtual bool Connect(const QString& host, int port,
+        virtual bool Connect(const QString& host, int port, const QString& dbName,
                              const QString& username, const QString& password) = 0;
     };
 }

@@ -6,7 +6,7 @@
 
 namespace views
 {
-    class ISqlView;
+    class IMainView;
 }
 
 namespace presenters
@@ -17,6 +17,7 @@ namespace presenters
         MainPresenter();
         ~MainPresenter();
         virtual const Tables& GetTables() const override;
+        virtual void ExecuteSql(const QString& query) override;
         virtual void PrepareInsert(const QString& tableName) override;
         virtual void DeleteSelected(const std::vector<int>& rows, const QString& tableName) override;
         virtual void Refresh(const QString& tableName) override;
@@ -25,7 +26,7 @@ namespace presenters
         void Start();
 
     private:
-        std::unique_ptr<views::ISqlView> m_sqlView;
+        std::unique_ptr<views::IMainView> m_sqlView;
         QSqlDatabase m_db;
         Tables m_tables;
     };

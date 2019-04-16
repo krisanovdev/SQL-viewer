@@ -11,6 +11,7 @@ namespace presenters
     public:
         virtual ~IDbPresenter(){}
         virtual const Tables& GetTables() const = 0;
+        virtual void ExecuteSql(const QString& query) = 0;
         virtual void PrepareInsert(const QString& tableName) = 0;
         virtual void DeleteSelected(const std::vector<int>& rows, const QString& tableName) = 0;
         virtual void Refresh(const QString& tableName) = 0;

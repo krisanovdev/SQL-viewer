@@ -16,6 +16,11 @@ const presenters::Tables& presenters::MainPresenter::GetTables() const
     return m_tables;
 }
 
+void presenters::MainPresenter::ExecuteSql(const QString& query)
+{
+
+}
+
 void presenters::MainPresenter::PrepareInsert(const QString& tableName)
 {
 
@@ -25,7 +30,7 @@ void presenters::MainPresenter::DeleteSelected(const std::vector<int>& rows, con
 {
     std::for_each(rows.cbegin(), rows.cend(), [this, &tableName](int row)
     {
-        this->m_tables[tableName]->removeRow(row);
+        m_tables[tableName]->removeRow(row);
     });
     this->Refresh(tableName);
 }
