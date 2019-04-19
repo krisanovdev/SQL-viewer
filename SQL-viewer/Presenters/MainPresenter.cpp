@@ -1,5 +1,6 @@
 #include <QSqlTableModel>
 #include "MainPresenter.h"
+#include "Views/MainView.h"
 
 presenters::MainPresenter::MainPresenter()
     : m_db(QSqlDatabase::addDatabase("QMYSQL"))
@@ -40,12 +41,12 @@ void presenters::MainPresenter::Refresh(const QString& tableName)
     static_cast<QSqlTableModel*>(m_tables[tableName])->select();
 }
 
-bool presenters::MainPresenter::Connect(const QString& host, int port, const QString& dbName, const QString& username, const QString& password)
+bool presenters::MainPresenter::Connect(const ConnectionOptions& opt, const QString& password)
 {
-    m_db.setHostName(host);
-    m_db.setPort(port);
-    m_db.setDatabaseName(dbName);
-    m_db.setUserName(username);
+    m_db.setHostName(opt.host);
+    m_db.setPort(opt.port);
+    m_db.setDatabaseName(opt.db);
+    m_db.setUserName(opt.username);
     m_db.setPassword(password);
 
     const bool isSuccess = m_db.open();
@@ -60,7 +61,8 @@ bool presenters::MainPresenter::Connect(const QString& host, int port, const QSt
             m_tables.emplace(table, model);
         }
 
-        m_sqlView.reset(new SQLView(this));
+        m_sqlView.reset(new views::MainView(this));
+        m_sqlView->Start();
     }
 
     return isSuccess;

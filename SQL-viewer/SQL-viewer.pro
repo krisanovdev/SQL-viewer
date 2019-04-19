@@ -10,7 +10,8 @@ SOURCES += \
     Models/CustomSqlModel.cpp \
     Views/SqlTableWidget.cpp \
     Presenters/MainPresenter.cpp \
-    Views/MainView.cpp
+    Views/MainView.cpp \
+    main.cpp
 
 HEADERS += \
     Models/CustomSqlModel.h \
@@ -18,7 +19,8 @@ HEADERS += \
     Views/SqlTableWidget.h \
     Presenters/MainPresenter.h \
     Presenters/IConnectionProvider.h \
-    Views/MainView.h
+    Views/MainView.h \
+    Views/IMainView.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

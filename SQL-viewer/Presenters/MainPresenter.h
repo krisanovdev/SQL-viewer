@@ -11,7 +11,7 @@ namespace views
 
 namespace presenters
 {
-    class MainPresenter : QObject, IDbPresenter, IConnectionProvider
+    class MainPresenter : public QObject, public IDbPresenter, public IConnectionProvider
     {
     public:
         MainPresenter();
@@ -21,8 +21,7 @@ namespace presenters
         virtual void PrepareInsert(const QString& tableName) override;
         virtual void DeleteSelected(const std::vector<int>& rows, const QString& tableName) override;
         virtual void Refresh(const QString& tableName) override;
-        virtual bool Connect(const QString& host, int port, const QString& dbName,
-                             const QString& username, const QString& password) override;
+        virtual bool Connect(const ConnectionOptions& opt, const QString& password) override;
         void Start();
 
     private:

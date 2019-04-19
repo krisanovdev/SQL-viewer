@@ -1,6 +1,7 @@
 #pragma once
 #include "ui_MainView.h"
 #include "SqlTableWidget.h"
+#include "IMainView.h"
 
 namespace presenters
 {
@@ -9,12 +10,13 @@ namespace presenters
 
 namespace views
 {
-    class MainView : public QWidget
+    class MainView : public QWidget, public IMainView
     {
         Q_OBJECT
 
     public:
         explicit MainView(presenters::IDbPresenter* presenter, QWidget *parent = nullptr);
+        virtual void Start() override;
 
     private slots:
         void on_tables_doubleClicked(const QModelIndex& index);

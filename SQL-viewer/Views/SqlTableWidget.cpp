@@ -1,5 +1,6 @@
 #include <QModelIndexList>
 #include <QModelIndex>
+#include <QCloseEvent>
 #include "SqlTableWidget.h"
 #include "ui_SqlTableWidget.h"
 
@@ -9,6 +10,12 @@ views::SqlTableWidget::SqlTableWidget(const QString& tableName, QAbstractItemMod
     m_ui.setupUi(this);
     m_ui.lbl_tableName->setText(tableName);
     m_ui.tableView->setModel(model);
+}
+
+void views::SqlTableWidget::closeEvent(QCloseEvent* event)
+{
+    emit Closed(m_ui.lbl_tableName->text());
+    event->accept();
 }
 
 void views::SqlTableWidget::on_btn_deleteSelected_clicked()

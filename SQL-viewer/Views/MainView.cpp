@@ -1,3 +1,4 @@
+#include <QStringListModel>
 #include "MainView.h"
 #include "Presenters/IDbPresenter.h"
 
@@ -6,6 +7,18 @@ views::MainView::MainView(presenters::IDbPresenter* presenter, QWidget *parent)
     , m_presenter(presenter)
 {
     m_ui.setupUi(this);
+    QStringList list;
+    foreach (const auto& item, presenter->GetTables())
+    {
+        list.append(item.first);
+    }
+    QAbstractItemModel* const model = new QStringListModel(list, m_ui.tables);
+    m_ui.tables->setModel(model);
+}
+
+void views::MainView::Start()
+{
+    this->show();
 }
 
 void views::MainView::on_tables_doubleClicked(const QModelIndex& index)
@@ -33,7 +46,7 @@ void views::MainView::OpenNewTable(const QString& tableName)
     QAbstractItemModel* const model = m_presenter->GetTables().at(tableName);
     SqlTableWidget* const widget = new SqlTableWidget(tableName, model, this);
 
-    connect(widget, &QObject::destroyed, [this, &tableName]()
+    connect(widget, &SqlTableWidget::Closed, [this](const QString& tableName)
     {
         m_openedTables.erase(tableName);
     });

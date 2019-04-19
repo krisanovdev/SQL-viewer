@@ -14,6 +14,10 @@ namespace views
         void DeleteSelected(const std::vector<int>& rows, const QString& tableName);
         void PrepareInsert(const QString& tableName);
         void Refresh(const QString& tableName);
+        void Closed(const QString& tableName);
+
+    protected:
+        virtual void closeEvent(QCloseEvent* event) override;
 
     private slots:
         void on_btn_deleteSelected_clicked();
