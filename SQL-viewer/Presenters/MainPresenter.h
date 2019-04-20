@@ -11,7 +11,7 @@ namespace views
 
 namespace presenters
 {
-    class MainPresenter : public QObject, public IDbPresenter, public IConnectionProvider
+    class MainPresenter : public QObject, public IDbPresenter
     {
     public:
         MainPresenter();

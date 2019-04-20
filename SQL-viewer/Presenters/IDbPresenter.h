@@ -1,12 +1,13 @@
 #pragma once
 #include <map>
 #include <QAbstractItemModel>
+#include "IConnectionProvider.h"
 
 namespace presenters
 {
     using Tables = std::map<QString, QAbstractItemModel*>;
 
-    class IDbPresenter
+    class IDbPresenter : public IConnectionProvider
     {
     public:
         virtual ~IDbPresenter(){}

@@ -38,22 +38,6 @@
     <set>QAbstractItemView::NoEditTriggers</set>
    </property>
   </widget>
-  <widget class="QListView" name="logs">
-   <property name="geometry">
-    <rect>
-     <x>300</x>
-     <y>390</y>
-     <width>741</width>
-     <height>251</height>
-    </rect>
-   </property>
-   <property name="sizePolicy">
-    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-     <horstretch>0</horstretch>
-     <verstretch>0</verstretch>
-    </sizepolicy>
-   </property>
-  </widget>
   <widget class="QPlainTextEdit" name="queryEditor">
    <property name="geometry">
     <rect>
@@ -130,7 +114,7 @@
      </widget>
     </item>
     <item>
-     <widget class="QLabel" name="lb_user">
+     <widget class="QLabel" name="lbl_user">
       <property name="text">
        <string>User:</string>
       </property>
@@ -151,7 +135,7 @@
     <string>Execute</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="llb_hint">
    <property name="geometry">
     <rect>
      <x>20</x>
@@ -162,6 +146,35 @@
    </property>
    <property name="text">
     <string>Double click cell to open table editor:</string>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="logs">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>360</y>
+     <width>741</width>
+     <height>241</height>
+    </rect>
+   </property>
+   <property name="readOnly">
+    <bool>true</bool>
+   </property>
+   <property name="placeholderText">
+    <string>Logs wiil be there</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="btn_clear">
+   <property name="geometry">
+    <rect>
+     <x>840</x>
+     <y>610</y>
+     <width>201</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Clear</string>
    </property>
   </widget>
  </widget>

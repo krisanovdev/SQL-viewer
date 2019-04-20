@@ -6,6 +6,7 @@
 namespace presenters
 {
     class IDbPresenter;
+    struct ConnectionOptions;
 }
 
 namespace views
@@ -15,12 +16,15 @@ namespace views
         Q_OBJECT
 
     public:
-        explicit MainView(presenters::IDbPresenter* presenter, QWidget* parent = nullptr);
+        MainView(presenters::IDbPresenter* presenter, const presenters::ConnectionOptions& options, QWidget* parent = nullptr);
         virtual void Start() override;
+        virtual void AddLog(const QString& log) override;
 
     private slots:
         void on_tables_doubleClicked(const QModelIndex& index);
         void on_btn_executeSql_clicked();
+
+        void on_btn_clear_clicked();
 
     private:
         void OpenNewTable(const QString& tableName);

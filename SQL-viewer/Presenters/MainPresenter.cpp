@@ -1,5 +1,6 @@
 #include <QSqlTableModel>
 #include <QSqlQuery>
+#include <QSqlError>
 #include <QStringList>
 #include "MainPresenter.h"
 #include "Views/ConnectDialog.h"
@@ -22,10 +23,14 @@ const presenters::Tables& presenters::MainPresenter::GetTables() const
 
 void presenters::MainPresenter::ExecuteSql(const QString& query)
 {
-
+    QSqlQuery q;
+    if (!q.exec(query))
+    {
+        m_sqlView->AddLog(q.lastError().text());
+    }
 }
 
-void presenters::MainPresenter::PrepareInsert(const QString& tableName)
+void presenters::MainPresenter::PrepareInsert(const QString& /*tableName*/)
 {
 
 }
@@ -73,7 +78,7 @@ bool presenters::MainPresenter::Connect(const ConnectionOptions& opt, const QStr
             m_tables.emplace(table, model);
         }
 
-        m_sqlView.reset(new views::MainView(this));
+        m_sqlView.reset(new views::MainView(this, opt));
         m_sqlView->Start();
     }
 
