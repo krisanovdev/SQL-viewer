@@ -14,6 +14,7 @@ views::MainView::MainView(presenters::IDbPresenter* presenter, QWidget *parent)
     }
     QAbstractItemModel* const model = new QStringListModel(list, m_ui.tables);
     m_ui.tables->setModel(model);
+    setFixedSize(size());
 }
 
 void views::MainView::Start()
@@ -31,7 +32,7 @@ void views::MainView::on_tables_doubleClicked(const QModelIndex& index)
     }
     else
     {
-        it->second->setFocus();
+        it->second->showNormal();
     }
 }
 
@@ -44,11 +45,12 @@ void views::MainView::on_btn_executeSql_clicked()
 void views::MainView::OpenNewTable(const QString& tableName)
 {
     QAbstractItemModel* const model = m_presenter->GetTables().at(tableName);
-    SqlTableWidget* const widget = new SqlTableWidget(tableName, model, this);
+    SqlTableWidget* const widget = new SqlTableWidget(tableName, model);
 
-    connect(widget, &SqlTableWidget::Closed, [this](const QString& tableName)
+    connect(widget, &SqlTableWidget::Closed, [this, widget](const QString& tableName)
     {
         m_openedTables.erase(tableName);
+        widget->deleteLater();
     });
 
     connect(widget, &SqlTableWidget::DeleteSelected, [this](const std::vector<int>& rows, const QString& tableName)

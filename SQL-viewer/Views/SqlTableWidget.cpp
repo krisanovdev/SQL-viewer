@@ -6,15 +6,17 @@
 
 views::SqlTableWidget::SqlTableWidget(const QString& tableName, QAbstractItemModel* model, QWidget *parent)
     : QWidget(parent)
+    , m_tableName(tableName)
 {
     m_ui.setupUi(this);
-    m_ui.lbl_tableName->setText(tableName);
     m_ui.tableView->setModel(model);
+    setWindowTitle(tableName);
+    setFixedSize(size());
 }
 
 void views::SqlTableWidget::closeEvent(QCloseEvent* event)
 {
-    emit Closed(m_ui.lbl_tableName->text());
+    emit Closed(m_tableName);
     event->accept();
 }
 
@@ -29,12 +31,12 @@ void views::SqlTableWidget::on_btn_deleteSelected_clicked()
         deleted.push_back(row.row());
     }
 
-    emit DeleteSelected(deleted, m_ui.lbl_tableName->text());
+    emit DeleteSelected(deleted, m_tableName);
 }
 
 void views::SqlTableWidget::on_btn_insert_clicked()
 {
-    emit PrepareInsert(m_ui.lbl_tableName->text());
+    emit PrepareInsert(m_tableName);
     QAbstractItemModel* const model = m_ui.tableView->model();
     model->insertRow(model->rowCount());
     m_ui.tableView->selectRow(model->rowCount() - 1);
@@ -43,5 +45,5 @@ void views::SqlTableWidget::on_btn_insert_clicked()
 
 void views::SqlTableWidget::on_btn_refresh_clicked()
 {
-    emit Refresh(m_ui.lbl_tableName->text());
+    emit Refresh(m_tableName);
 }

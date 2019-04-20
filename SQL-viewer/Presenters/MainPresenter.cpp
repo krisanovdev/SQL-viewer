@@ -1,5 +1,8 @@
 #include <QSqlTableModel>
+#include <QSqlQuery>
+#include <QStringList>
 #include "MainPresenter.h"
+#include "Views/ConnectDialog.h"
 #include "Views/MainView.h"
 
 presenters::MainPresenter::MainPresenter()
@@ -53,11 +56,20 @@ bool presenters::MainPresenter::Connect(const ConnectionOptions& opt, const QStr
 
     if (isSuccess)
     {
-        const QStringList& tables = m_db.tables();
+        QSqlQuery query;
+        query.exec("show tables");
+
+        QStringList tables;
+        while(query.next())
+        {
+            tables.append(query.value(0).toStringList());
+        }
+
         foreach (const QString& table, tables)
         {
             QSqlTableModel* model = new QSqlTableModel(this, m_db);
             model->setTable(table);
+            model->select();
             m_tables.emplace(table, model);
         }
 
@@ -66,4 +78,10 @@ bool presenters::MainPresenter::Connect(const ConnectionOptions& opt, const QStr
     }
 
     return isSuccess;
+}
+
+void presenters::MainPresenter::Start()
+{
+    views::ConnectDialog* dialog = new views::ConnectDialog(this);
+    dialog->show();
 }

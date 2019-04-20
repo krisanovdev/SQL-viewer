@@ -11,7 +11,8 @@ SOURCES += \
     Views/SqlTableWidget.cpp \
     Presenters/MainPresenter.cpp \
     Views/MainView.cpp \
-    main.cpp
+    main.cpp \
+    Views/ConnectDialog.cpp
 
 HEADERS += \
     Models/CustomSqlModel.h \
@@ -20,7 +21,8 @@ HEADERS += \
     Presenters/MainPresenter.h \
     Presenters/IConnectionProvider.h \
     Views/MainView.h \
-    Views/IMainView.h
+    Views/IMainView.h \
+    Views/ConnectDialog.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -29,4 +31,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 
 FORMS += \
     Views/SqlTableWidget.ui \
-    Views/MainView.ui
+    Views/MainView.ui \
+    Views/ConnectDialog.ui

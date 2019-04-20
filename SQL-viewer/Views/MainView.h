@@ -15,7 +15,7 @@ namespace views
         Q_OBJECT
 
     public:
-        explicit MainView(presenters::IDbPresenter* presenter, QWidget *parent = nullptr);
+        explicit MainView(presenters::IDbPresenter* presenter, QWidget* parent = nullptr);
         virtual void Start() override;
 
     private slots:

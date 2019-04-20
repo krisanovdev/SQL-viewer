@@ -26,6 +26,7 @@ namespace views
 
     private:
         Ui::SqlTableWidget m_ui;
+        QString m_tableName;
     };
 }
 
