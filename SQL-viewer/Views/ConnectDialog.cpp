@@ -1,3 +1,4 @@
+#include <QMessageBox>
 #include "ConnectDialog.h"
 #include "Presenters/IConnectionProvider.h"
 
@@ -21,5 +22,9 @@ void views::ConnectDialog::on_btn_connect_clicked()
     {
         deleteLater();
         close();
+    }
+    else
+    {
+        QMessageBox::warning(this, "Invalid credentials", "Provided information is not correct. Please, try again.");
     }
 }
