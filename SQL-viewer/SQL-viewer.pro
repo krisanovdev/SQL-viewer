@@ -11,7 +11,6 @@ SOURCES += \
     Views/SqlTableWidget.cpp \
     Presenters/MainPresenter.cpp \
     Views/MainView.cpp \
-    main.cpp \
     Views/ConnectDialog.cpp
 
 HEADERS += \
