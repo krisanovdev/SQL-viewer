@@ -38,34 +38,6 @@
     <set>QAbstractItemView::NoEditTriggers</set>
    </property>
   </widget>
-  <widget class="QPlainTextEdit" name="queryEditor">
-   <property name="geometry">
-    <rect>
-     <x>300</x>
-     <y>120</y>
-     <width>741</width>
-     <height>181</height>
-    </rect>
-   </property>
-   <property name="sizePolicy">
-    <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-     <horstretch>0</horstretch>
-     <verstretch>0</verstretch>
-    </sizepolicy>
-   </property>
-   <property name="font">
-    <font>
-     <family>Courier New</family>
-     <pointsize>10</pointsize>
-    </font>
-   </property>
-   <property name="plainText">
-    <string/>
-   </property>
-   <property name="placeholderText">
-    <string>Input your SQL query here...</string>
-   </property>
-  </widget>
   <widget class="QWidget" name="horizontalLayoutWidget">
    <property name="geometry">
     <rect>
@@ -161,7 +133,7 @@
     <bool>true</bool>
    </property>
    <property name="placeholderText">
-    <string>Logs wiil be there</string>
+    <string>Logs wiil be here...</string>
    </property>
   </widget>
   <widget class="QPushButton" name="btn_clear">
@@ -175,6 +147,19 @@
    </property>
    <property name="text">
     <string>Clear</string>
+   </property>
+  </widget>
+  <widget class="QTextEdit" name="queryEditor">
+   <property name="geometry">
+    <rect>
+     <x>293</x>
+     <y>120</y>
+     <width>751</width>
+     <height>181</height>
+    </rect>
+   </property>
+   <property name="placeholderText">
+    <string>Input your SQL query here...</string>
    </property>
   </widget>
  </widget>

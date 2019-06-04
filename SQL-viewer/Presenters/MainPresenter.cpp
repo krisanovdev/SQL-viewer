@@ -23,10 +23,21 @@ const presenters::Tables& presenters::MainPresenter::GetTables() const
 
 void presenters::MainPresenter::ExecuteSql(const QString& query)
 {
-    QSqlQuery q;
-    if (!q.exec(query))
+    QSqlQuery q(query);
+    if (q.isSelect())
+    {
+        QSqlQueryModel* const model = new QSqlQueryModel(this);
+        model->setQuery(q);
+        m_sqlView->ShowSelectionResult(model);
+    }
+
+    if (!q.exec())
     {
         m_sqlView->AddLog(q.lastError().text());
+    }
+    else
+    {
+        m_sqlView->AddLog("Successfully executed query.");
     }
 }
 

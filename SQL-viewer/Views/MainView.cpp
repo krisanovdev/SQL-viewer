@@ -32,6 +32,15 @@ void views::MainView::AddLog(const QString& log)
     m_ui.logs->append(QDateTime::currentDateTime().toString() + " : " + log);
 }
 
+void views::MainView::ShowSelectionResult(QAbstractItemModel* model)
+{
+    QTableView* const selectionView = new QTableView(this);
+    selectionView->setModel(model);
+    selectionView->setFixedSize(this->size());
+    selectionView->setWindowFlag(Qt::Dialog);
+    selectionView->show();
+}
+
 void views::MainView::on_tables_doubleClicked(const QModelIndex& index)
 {
     const QString& tableName = m_ui.tables->model()->data(index).toString();
@@ -59,6 +68,7 @@ void views::MainView::on_btn_clear_clicked()
 
 void views::MainView::OpenNewTable(const QString& tableName)
 {
+    m_presenter->Refresh(tableName);
     QAbstractItemModel* const model = m_presenter->GetTables().at(tableName);
     SqlTableWidget* const widget = new SqlTableWidget(tableName, model);
 

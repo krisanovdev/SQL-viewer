@@ -19,6 +19,7 @@ namespace views
         MainView(presenters::IDbPresenter* presenter, const presenters::ConnectionOptions& options, QWidget* parent = nullptr);
         virtual void Start() override;
         virtual void AddLog(const QString& log) override;
+        virtual void ShowSelectionResult(QAbstractItemModel* model) override;
 
     private slots:
         void on_tables_doubleClicked(const QModelIndex& index);
